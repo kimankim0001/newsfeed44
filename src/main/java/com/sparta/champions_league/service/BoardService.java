@@ -25,10 +25,11 @@ public class BoardService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다."));
     }
 
-
-
-
-
+    public List<BoardResponseDto> getAllBoards() {
+        return boardRepository.findAll().stream()
+                .map(BoardResponseDto::new)
+                .collect(Collectors.toList());
+    }
 
 
 }

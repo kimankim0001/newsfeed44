@@ -21,4 +21,8 @@ public class BoardController {
     public BoardResponseDto getBoard(@PathVariable Long boardNum) {
         return boardService.getBoard(boardNum);
     }
+    @GetMapping("/boards")
+    public List<BoardResponseDto> getAllBoards() {
+        return boardService.getAllBoards();
+    }
 }

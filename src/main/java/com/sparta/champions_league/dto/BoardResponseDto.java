@@ -1,4 +1,4 @@
 package com.sparta.champions_league.dto;
 
-public class BoardResposeDto {
+public class BoardResponseDto {
 }

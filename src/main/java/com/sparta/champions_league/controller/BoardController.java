@@ -25,4 +25,9 @@ public class BoardController {
     public List<BoardResponseDto> getAllBoards() {
         return boardService.getAllBoards();
     }
+
+    @PostMapping("/boards")
+    public BoardResponseDto createBoard(@RequestBody BoardRequestDto requestDto) {
+        return boardService.createBoard(requestDto);
+    }
 }

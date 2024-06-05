@@ -31,5 +31,12 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
+    public BoardResponseDto createBoard(BoardRequestDto requestDto) {
+        Board board = new Board();
+        board.setTitle(requestDto.getTitle());
+        board.setContent(requestDto.getContent());
+        boardRepository.save(board);
+        return new BoardResponseDto(board);
+    }
 
 }

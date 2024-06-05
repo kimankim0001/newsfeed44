@@ -1,5 +1,4 @@
 package com.sparta.champions_league.dto;
-
 import com.sparta.champions_league.entity.Board;
 import lombok.Getter;
 
@@ -14,4 +13,4 @@ public class BoardResponseDto {
         this.title = board.getTitle();
         this.content = board.getContent();
     }
-}
+

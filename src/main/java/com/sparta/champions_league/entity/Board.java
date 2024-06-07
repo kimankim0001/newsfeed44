@@ -19,6 +19,4 @@ public class Board extends Timestamped{
 
     private String content;
 
-
-
 }

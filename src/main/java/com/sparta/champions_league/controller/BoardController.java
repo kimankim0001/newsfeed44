@@ -5,6 +5,8 @@ import com.sparta.champions_league.dto.BoardResponseDto;
 import com.sparta.champions_league.dto.BoardUpdateDto;
 import com.sparta.champions_league.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class BoardController {
     public BoardResponseDto getBoard(@PathVariable Long boardNum) {
         return boardService.getBoard(boardNum);
     }
+
     @GetMapping("/boards")
     public List<BoardResponseDto> getAllBoards() {
         return boardService.getAllBoards();
@@ -30,4 +33,16 @@ public class BoardController {
     public BoardResponseDto createBoard(@RequestBody BoardRequestDto requestDto) {
         return boardService.createBoard(requestDto);
     }
+
+    @PutMapping("/boards/{boardNum}")
+    public BoardUpdateDto updateBoard(@PathVariable Long boardNum, @RequestBody BoardRequestDto requestDto) {
+        return boardService.updateBoard(boardNum, requestDto);
+    }
+
+    @DeleteMapping("/boards/{boardNum}")
+    public ResponseEntity<String> deleteBoard(@PathVariable Long boardNum) {
+        boardService.deleteBoard(boardNum);
+        return new ResponseEntity<>("게시물 삭제 되었습니다.", HttpStatusCode.valueOf(200));
+    }
+
 }

@@ -6,6 +6,7 @@ import com.sparta.champions_league.dto.BoardUpdateDto;
 import com.sparta.champions_league.entity.Board;
 import com.sparta.champions_league.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,6 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-
     public BoardResponseDto getBoard(Long boardNum) {
         return boardRepository.findById(boardNum)
                 .map(BoardResponseDto::new)
@@ -26,9 +26,13 @@ public class BoardService {
     }
 
     public List<BoardResponseDto> getAllBoards() {
-        return boardRepository.findAll().stream()
+        List<Board> boards = boardRepository.findAllByOrderByCreatedAtDesc();
+        if (boards.isEmpty()) {
+            throw new IllegalArgumentException("먼저 작성하여 소식을 알려보세요!");
+        }
+        return boards.stream()
                 .map(BoardResponseDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public BoardResponseDto createBoard(BoardRequestDto requestDto) {
@@ -41,12 +45,18 @@ public class BoardService {
 
     @Transactional
     public BoardUpdateDto updateBoard(Long boardNum, BoardRequestDto requestDto) {
-       Board board = boardRepository.findById(boardNum).orElseThrow(
+        Board board = boardRepository.findById(boardNum).orElseThrow(
                 () -> new IllegalArgumentException("선택한 게시물이 없습니다."));
 
         board.setTitle(requestDto.getTitle());
         board.setContent(requestDto.getContent());
         Board updatedBoard = boardRepository.save(board);
         return new BoardUpdateDto(updatedBoard);
+    }
+
+    public void deleteBoard(Long boardNum) {
+        Board board = boardRepository.findById(boardNum).orElseThrow(
+                () -> new IllegalArgumentException("선택한 게시물이 없습니다."));
+        boardRepository.delete(board);
     }
 }

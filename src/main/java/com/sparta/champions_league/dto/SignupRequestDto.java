@@ -6,9 +6,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SignupRequestDto {
-    private String username;
+    private Long user_id;
+    private String user_name;
     private String password;
     private String email;
+    private String comment;
+    private Integer team;
     private boolean admin = false;
     private String adminToken = "";
 }

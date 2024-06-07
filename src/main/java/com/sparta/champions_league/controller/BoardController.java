@@ -21,6 +21,7 @@ public class BoardController {
     public BoardResponseDto getBoard(@PathVariable Long boardNum) {
         return boardService.getBoard(boardNum);
     }
+
     @GetMapping("/boards")
     public List<BoardResponseDto> getAllBoards() {
         return boardService.getAllBoards();
@@ -35,4 +36,10 @@ public class BoardController {
     public BoardUpdateDto updateBoard(@PathVariable Long boardNum, @RequestBody BoardRequestDto requestDto) {
         return boardService.updateBoard(boardNum, requestDto);
     }
+
+    @DeleteMapping("/boards/{boardNum}")
+    public void deleteBoard(@PathVariable Long boardNum) {
+        boardService.deleteBoard(boardNum);
+    }
+
 }

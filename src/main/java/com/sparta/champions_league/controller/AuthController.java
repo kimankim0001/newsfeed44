@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 
 @RestController
 @RequestMapping("/api")
-public class AuthController {
+public class  AuthController {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
 

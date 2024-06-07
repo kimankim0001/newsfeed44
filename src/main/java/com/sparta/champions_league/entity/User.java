@@ -14,10 +14,10 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long user_id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String user_name;
 
     @Column(nullable = false)
     private String password;
@@ -26,14 +26,20 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private UserRoleEnum role;
+    private String comment;
 
-    public User(String username, String password, String email, UserRoleEnum role) {
-        this.username = username;
+    @Column(nullable = false, unique = true)
+    private Integer team;
+
+
+    public User(Long user_id, String user_name, String password, String email,String comment,Integer team ) {
+        this.user_id=user_id;
+        this.user_name = user_name;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.comment = comment;
+        this.team = team;
+
 
     }
 }

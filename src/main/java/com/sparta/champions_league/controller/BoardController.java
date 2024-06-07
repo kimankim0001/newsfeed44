@@ -30,4 +30,9 @@ public class BoardController {
     public BoardResponseDto createBoard(@RequestBody BoardRequestDto requestDto) {
         return boardService.createBoard(requestDto);
     }
+
+    @PutMapping("/boards/{boardNum}")
+    public BoardUpdateDto updateBoard(@PathVariable Long boardNum, @RequestBody BoardRequestDto requestDto) {
+        return boardService.updateBoard(boardNum, requestDto);
+    }
 }

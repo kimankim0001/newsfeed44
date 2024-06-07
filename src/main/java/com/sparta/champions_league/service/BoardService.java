@@ -39,4 +39,14 @@ public class BoardService {
         return new BoardResponseDto(board);
     }
 
+    @Transactional
+    public BoardUpdateDto updateBoard(Long boardNum, BoardRequestDto requestDto) {
+       Board board = boardRepository.findById(boardNum).orElseThrow(
+                () -> new IllegalArgumentException("선택한 게시물이 없습니다."));
+
+        board.setTitle(requestDto.getTitle());
+        board.setContent(requestDto.getContent());
+        Board updatedBoard = boardRepository.save(board);
+        return new BoardUpdateDto(updatedBoard);
+    }
 }

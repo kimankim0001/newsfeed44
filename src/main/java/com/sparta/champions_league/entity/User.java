@@ -30,7 +30,7 @@ public class User {
     @Column(nullable = false)
     private String comment;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Integer team;
 
     @Column(nullable = false)
@@ -49,10 +49,11 @@ public class User {
         this.comment = comment;
     }
 
-    public void updateUserProfile(String userId, String userName, String email, String password){
+    public void updateUserProfile(String userId, String userName, String email, String comment, String password){
         this.userId = userId;
         this.userName = userName;
         this.email = email;
+        this.comment = comment;
         this.password = password;
     }
 }

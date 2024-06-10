@@ -19,12 +19,14 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    //Board 단건 조회
     public BoardResponseDto getBoard(Long boardNum) {
         return boardRepository.findById(boardNum)
                 .map(BoardResponseDto::new)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다."));
     }
 
+    //Board 전체 조회
     public List<BoardResponseDto> getAllBoards() {
         List<Board> boards = boardRepository.findAllByOrderByCreatedAtDesc();
         if (boards.isEmpty()) {
@@ -35,6 +37,7 @@ public class BoardService {
                 .toList();
     }
 
+    //Board 생성
     public BoardResponseDto createBoard(BoardRequestDto requestDto) {
         Board board = new Board();
         board.setTitle(requestDto.getTitle());
@@ -43,6 +46,7 @@ public class BoardService {
         return new BoardResponseDto(board);
     }
 
+    //Board 수정
     @Transactional
     public BoardUpdateDto updateBoard(Long boardNum, BoardRequestDto requestDto) {
         Board board = boardRepository.findById(boardNum).orElseThrow(
@@ -54,6 +58,7 @@ public class BoardService {
         return new BoardUpdateDto(updatedBoard);
     }
 
+    //선택 Board 삭제
     public void deleteBoard(Long boardNum) {
         Board board = boardRepository.findById(boardNum).orElseThrow(
                 () -> new IllegalArgumentException("선택한 게시물이 없습니다."));

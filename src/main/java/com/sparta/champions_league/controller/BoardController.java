@@ -19,26 +19,31 @@ public class BoardController {
     private final BoardService boardService;
 
 
+    //Board 단건 조회
     @GetMapping("/boards/{boardNum}")
     public BoardResponseDto getBoard(@PathVariable Long boardNum) {
         return boardService.getBoard(boardNum);
     }
 
+    //Board 전체 조회
     @GetMapping("/boards")
     public List<BoardResponseDto> getAllBoards() {
         return boardService.getAllBoards();
     }
 
+    //Board 생성
     @PostMapping("/boards")
     public BoardResponseDto createBoard(@RequestBody BoardRequestDto requestDto) {
         return boardService.createBoard(requestDto);
     }
 
+    //Board 수정
     @PutMapping("/boards/{boardNum}")
     public BoardUpdateDto updateBoard(@PathVariable Long boardNum, @RequestBody BoardRequestDto requestDto) {
         return boardService.updateBoard(boardNum, requestDto);
     }
 
+    //선택 Board 삭제
     @DeleteMapping("/boards/{boardNum}")
     public ResponseEntity<String> deleteBoard(@PathVariable Long boardNum) {
         boardService.deleteBoard(boardNum);

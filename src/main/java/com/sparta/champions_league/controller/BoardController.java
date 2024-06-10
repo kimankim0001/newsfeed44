@@ -3,10 +3,12 @@ package com.sparta.champions_league.controller;
 import com.sparta.champions_league.dto.BoardRequestDto;
 import com.sparta.champions_league.dto.BoardResponseDto;
 import com.sparta.champions_league.dto.BoardUpdateDto;
+import com.sparta.champions_league.security.UserDetailsImpl;
 import com.sparta.champions_league.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +35,8 @@ public class BoardController {
 
     //Board 생성
     @PostMapping("/boards")
-    public BoardResponseDto createBoard(@RequestBody BoardRequestDto requestDto) {
-        return boardService.createBoard(requestDto);
+    public BoardResponseDto createBoard(@RequestBody BoardRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return boardService.createBoard(requestDto,userDetails.getUser());
     }
 
     //Board 수정

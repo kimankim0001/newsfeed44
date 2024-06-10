@@ -92,11 +92,11 @@ public class UserService {
 
 
     //사용자 조회
-    public User  getUser(Long userNum) {
-        userRepository.findById(userNum).orElseThrow(
+    public ProfileResponseDto getUser(Long userNum) {
+        User user = userRepository.findById(userNum).orElseThrow(
                 ()-> new IllegalArgumentException("일치하는 회원이 없습니다.")
         );
-        return getUser(userNum);
+        return new ProfileResponseDto(user.getUserId(), user.getUserName(), user.getEmail(), user.getPassword(), user.getComment());
     }
 
 
@@ -111,8 +111,8 @@ public class UserService {
 
         String checkPassword = passwordEncoder.encode(requestDto.getPassword());
 
-        user.updateUserProfile(requestDto.getUserId(), requestDto.getUserName(), requestDto.getEmail(), checkPassword);
-        return new ProfileResponseDto(user.getUserId(), user.getUserName(), user.getEmail(), checkPassword);
+        user.updateUserProfile(requestDto.getUserId(), requestDto.getUserName(), requestDto.getEmail(), requestDto.getComment(), checkPassword);
+        return new ProfileResponseDto(user.getUserId(), user.getUserName(), user.getEmail(), user.getComment(), checkPassword);
     }
 
 

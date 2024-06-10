@@ -37,22 +37,22 @@ public class UserController {
 
     // 프로필 단건조회
     @GetMapping("/users/profile/{userNum}")
-    public ResponseEntity<User> getUser(@PathVariable(value = "userName") Long userNum) {
-        User user = userService.getUser(userNum);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<ProfileResponseDto> getUser(@PathVariable(value = "userNum") Long userNum) {
+        ProfileResponseDto responseDto = userService.getUser(userNum);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
 
     }
 
     // 회원탈퇴
     @DeleteMapping("/users/{userNum}")
-    public ResponseEntity<String> deleteUser(@PathVariable(value = "userName") Long userNum, @RequestBody UserUpdateDto userUpdateDto) {
+    public ResponseEntity<String> deleteUser(@PathVariable(value = "userNum") Long userNum, @RequestBody UserUpdateDto userUpdateDto) {
         userService.deleteUser(userNum, userUpdateDto);
         return new ResponseEntity<>("회원탈퇴 성공", HttpStatusCode.valueOf(200));
     }
 
     // 회원정보수정
     @PutMapping("/users/profile/{userNum}")
-    public ResponseEntity<ProfileResponseDto> updateUser(@PathVariable(value = "userName") Long userNum, @RequestBody UserUpdateDto userUpdateDto) {
+    public ResponseEntity<ProfileResponseDto> updateUser(@PathVariable(value = "userNum") Long userNum, @RequestBody UserUpdateDto userUpdateDto) {
         return ResponseEntity.ok().body(userService.updateUser(userNum, userUpdateDto));
     }
 }

@@ -9,6 +9,6 @@ public class LoginResponseDto { // POSTMAN 에서 회원정보 제대로 나오�
     private String userId;
     private String password;
     private String email;
-    private String name;
+    private String userName;
     private String token;
 }

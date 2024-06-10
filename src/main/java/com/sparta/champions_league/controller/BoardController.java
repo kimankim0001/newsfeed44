@@ -41,8 +41,8 @@ public class BoardController {
 
     //Board 수정
     @PutMapping("/boards/{boardNum}")
-    public BoardUpdateDto updateBoard(@PathVariable Long boardNum, @RequestBody BoardRequestDto requestDto) {
-        return boardService.updateBoard(boardNum, requestDto);
+    public BoardUpdateDto updateBoard(@PathVariable Long boardNum, @RequestBody BoardRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return boardService.updateBoard(boardNum, requestDto, userDetails.getUser());
     }
 
     //선택 Board 삭제

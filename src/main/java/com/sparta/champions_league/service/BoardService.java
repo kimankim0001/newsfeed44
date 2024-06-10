@@ -46,14 +46,13 @@ public class BoardService {
 
     //Board 수정
     @Transactional
-    public BoardUpdateDto updateBoard(Long boardNum, BoardRequestDto requestDto) {
+    public BoardUpdateDto updateBoard(Long boardNum, BoardRequestDto requestDto, User user) {
         Board board = boardRepository.findById(boardNum).orElseThrow(
                 () -> new IllegalArgumentException("선택한 게시물이 없습니다."));
 
-        board.setTitle(requestDto.getTitle());
-        board.setContent(requestDto.getContent());
-        Board updatedBoard = boardRepository.save(board);
-        return new BoardUpdateDto(updatedBoard);
+        Board boards = new Board(requestDto.getTitle(), requestDto.getContent(),user);
+        boardRepository.save(boards);
+        return new BoardUpdateDto(boards);
     }
 
     //선택 Board 삭제

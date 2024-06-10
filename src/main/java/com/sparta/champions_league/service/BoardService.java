@@ -50,9 +50,8 @@ public class BoardService {
         Board board = boardRepository.findById(boardNum).orElseThrow(
                 () -> new IllegalArgumentException("선택한 게시물이 없습니다."));
 
-        Board boards = new Board(requestDto.getTitle(), requestDto.getContent(),user);
-        boardRepository.save(boards);
-        return new BoardUpdateDto(boards);
+        board.update(requestDto.getTitle(), requestDto.getContent(),user);
+        return new BoardUpdateDto(board);
     }
 
     //선택 Board 삭제

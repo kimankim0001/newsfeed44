@@ -8,15 +8,17 @@ public class ProfileResponseDto {
     private String userId;
     private String userName;
     private String email;
-    private String comment;
     private String password;
+    private String comment;
 
 
-    public ProfileResponseDto(String userId, String userName, String email, String comment, String password) {
+
+    public ProfileResponseDto(String userId, String userName, String email, String password, String comment) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
-        this.comment = comment;
         this.password = password;
+        this.comment = comment;
+
     }
 }
